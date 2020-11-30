@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>LanguageWorker_Portuguese Mod</name>
+	<author>b606</author>
+  <url>https://github.com/b606/RimWorld-LanguageWorker_Portuguese/</url>
+  <packageId>b606.LanguageWorkerPortuguese.Mod</packageId>
+  <supportedVersions>
+    <li>1.0</li>
+    <li>1.1</li>
+    <li>1.2</li>
+  </supportedVersions>
+	<description>LanguageWorker_Portuguese Mod mejora las reglas gramaticales y de tipografía específicas del idioma de destino en RimWorld, que son imposibles de implementar sin modificar el código incorporado en el juego. Es un complemento al trabajo de los traductores. El español y el español de América Latina están soportados.
+
+&lt;b&gt;Gracias a&lt;/b&gt;
+Elevator89 de quien saqué la idea de desarrollar los mods de LanguageWorker, Pardeike por su fabulosa biblioteca de parches de LibHarmony, y los probadores. La fuente RimWorld hecha por fans es de Marnador.
+</description>
+  <incompatibleWith>
+    <li>b606.LanguageWorkerFrench.Mod</li>
+    <li>b606.LanguageWorkerSpanish.Mod</li>
+  </incompatibleWith>
+</ModMetaData>
