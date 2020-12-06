@@ -1,4 +1,4 @@
-﻿// <code-header>
+// <code-header>
 //   <author>b606</author>
 //   <summary>
 //		RulesForBodyPartRecordPatch: Prefix libHarmony patch for GrammarUtility.RulesForBodyPartRecord.
@@ -32,7 +32,7 @@ namespace RimWorld_LanguageWorker_Portuguese
 				return true;
 
 			// Rewrite the method entirely since it is short enough
-			__result = LanguageWorker_Portuguese.FixRulesForBodyPartRecord(prefix, part);
+			__result = LanguageWorkerPatcher.FixRulesForBodyPartRecord(prefix, part);
 
 #if DEBUG
 			LanguageWorkerPatcher.LogMessage("--RulesForBodyPartRecordPrefix called...");

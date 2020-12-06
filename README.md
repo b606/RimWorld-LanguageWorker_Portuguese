@@ -24,15 +24,13 @@ The mod is also designed to be as independent as possible and does not require a
 
 **Features list:**
 
-- Fix definite and indefinite articles.
-- Fix plurals for single words. The list of exceptions to plurals such as irregular, foreign words, and invariants needs to be updated when needed (WIP). Plurals for compound or hyphenated words is also a WIP (spanih speaking testers needed.)
-- Contractions: "de el" -> "del", "a el" -> "al".
+- Fix plurals for single words. The list of exceptions to plurals such as irregular, foreign words, and invariants needs to be updated when needed (WIP). Plurals for compound or hyphenated words is also a WIP (Portuguese speaking testers needed.)
+- Many contractions: "{de|em|por|a|para|com} {article|pronoun}", ex. "dele|dela|...|do|da|dum etc.", "nele|nela|...|no|na|num etc.", and so on. These will be activated automatically where the official translation files use the tags {X_indefinite}, {X_definite}, {X_pronoun} or {X_objective}.
 - Tribal pawns, cities and towns, factions and geographical features get proper uppercase.
 - Quest titles get specialized uppercase algorithm (WIP, adapt to the cultural practice).
-- Other text post-processing: "de sexo varón" -> "de sexo masculino", "de sexo mujer" -> "de sexo femenino". The current RimWorld grammar system does not provide a way to deal with the psychic drones affected gender correctly. 
-- (*)Epicene animals: the mod defines male only or female only animal labels. As of now, it appends a gender qualification to the generic label, ex. "la rata", "la rata macho" or "el rhinoceros hembra". When the animal is tamed and named, the gender revert back to the physical gender.Please, advise if this behaviour is inappropriate. NB: This is for single animal only, generic animal label (XXX_kindLabel) must be handled correctly in the official translation files.
-- (*)WIP: XXX_possessive depends on the object (possessed) gender, not the subject (possessor) gender. In French, that was essential. In Portuguese, difference should be detected only for plural ("sus") but the patch can do more than that.
-- WIP: other elisions can be implemented (the French version has many of them, here spanih speaking testers can ask if more is needed)
+- (*)Epicene animals: the mod defines male only or female only animal labels. As of now, it appends a gender qualification to the generic label, ex. "a gazela", "a gazela macho" or "o rhinoceros fêmea". When the animal is tamed and named, the gender revert back to the physical gender.Please, advise if this behaviour is inappropriate. These will be activated automatically where the official translation files use the tags {X_label}, {X_indefinite}, {X_definite}. The tags {X_gender}, {X_pronoun} and {X_objective} change accordingly. NB: This is for single animal only, generic animal label (XXX_kindLabel) must be handled correctly in the official translation files.
+- (*)Possessive pronoun depends on the object (possessed) gender, not the subject (possessor) gender. So for example, in order to translate "[INITIATOR_possessive] [TOOL_label]", one should use "[TOOL_possessive] [TOOL_label]". The mod adds keys for possessive plural "seus" and "suas". Then {X_possessive} should resolve to "sues" or "suas" if the word is categorized in is classified in WordInfo/Gender/{Male,Female}.txt. The bash script in `Notes/scripts/update-wordinfo.sh` can automatically extract most of the labels in the game.
+- WIP: other contractions and elisions are not implemented (the portuguese language has many of them, native speaking testers can ask if more is needed)
 
 My Portuguese speaking level is less than zero so I need testers to verify the correctness of what is implemented and to define the area of improvement. Please check the opened issues if one is related to your subject. Also, please feel free to submit suggestions and bug reports.
 

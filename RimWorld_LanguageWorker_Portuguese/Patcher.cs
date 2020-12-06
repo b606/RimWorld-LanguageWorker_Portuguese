@@ -1,4 +1,4 @@
-﻿// <code-header>
+// <code-header>
 //   <author>b606</author>
 //   <summary>
 //		libHarmony patches manager.
@@ -11,16 +11,34 @@ using System.Diagnostics;
 using System.Reflection;
 using HarmonyLib;
 using Verse;
+using Verse.Grammar;
 
 namespace RimWorld_LanguageWorker_Portuguese
 {
 	public static class LanguageWorkerPatcher
 	{
+		public static Type GetWorkerType() => typeof(LanguageWorker_Portuguese);
+
 		public static bool IsTargetLanguage(string aLang) => LanguageWorker_Portuguese.IsTargetLanguage(aLang);
 
 		public static string GetTargetLanguageFamily() => LanguageWorker_Portuguese.GetTargetLanguageFamily();
 
 		public static void LogMessage(string a_str) => LanguageWorker_Portuguese.LogMessage(a_str);
+
+		public static void FixPawnGender(ref PawnKindDef kind, ref Gender gender, string relationInfo)
+		{
+			LanguageWorker_Portuguese.FixPawnGender(ref kind, ref gender, relationInfo);
+		}
+
+		public static IEnumerable<Rule> FixRulesForBodyPartRecord(string prefix, BodyPartRecord part)
+		{
+			return LanguageWorker_Portuguese.FixRulesForBodyPartRecord(prefix, part);
+		}
+
+		public static IEnumerable<Rule> FixRulesForDef(string prefix, Def def)
+		{
+			return LanguageWorker_Portuguese.FixRulesForDef(prefix, def);
+		}
 
 		public static void DoPatching()
 		{

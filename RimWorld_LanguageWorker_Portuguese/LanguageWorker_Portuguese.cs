@@ -28,26 +28,17 @@ namespace RimWorld_LanguageWorker_Portuguese
 			//StopStatsLogging("LanguageWorker_Portuguese", "LanguageWorker_Portuguese");
 		}
 
-		// TODO: in plural, these words get -es
-		private static readonly HashSet<string> Exceptions_Plural_es = new HashSet<string> {
-			// "sí",
-			"no"
-		};
-
-		// TODO: in plural, these words get -s
-		private static readonly HashSet<string> Exceptions_Plural_s = new HashSet<string>
-		{
-			//	"menú",
-			//	"popurrí"
-		};
-
 		// TODO: in plural, these words are invariant
 		private static readonly HashSet<string> Exceptions_Plural_invariant = new HashSet<string>
 		{
+				"oásis",
+				"lápis",
+				"luciferium",
 				"yorkshire",
 				"molotov",
 				"pemmican",
 				"pekoe",
+								// TODO: remove spanish
 				"tórax",
 				"protórax",
 				"bum",			// for ratas-bum
@@ -59,6 +50,16 @@ namespace RimWorld_LanguageWorker_Portuguese
 		// TODO: irregular plural, mostly foreign words with plural in the original language
 		private Dictionary<string, string> Exceptions_Plural_irregular = new Dictionary<string, string>
 		{
+			// Ending with "-ão"
+				{"cão","cães"},
+				{"coração","corações"},
+				{"leão","leões"},
+				{"pão","pães"},
+			// Ending with "-l"
+				{"farol","faróis"},
+				{"papel","papéis"},
+				{"réptil","répteis"},
+			// Foreign words
 				{"box","boxes"},
 				{"pilum","pila"}
 		};
@@ -149,16 +150,50 @@ namespace RimWorld_LanguageWorker_Portuguese
 		// TODO: check if Portuguese typography is similar to french one.
 		private static HashSet<string> NonUppercaseWords = new HashSet<string>
 		{
-			"a",		// "a la",
-			"al",		// "a la",
-			"de",		// "de la",
-			"del",
+			"a",
+			"ao",
+			"à",
+			"às",
+			"até",
+			"com",
+			"co",
+			"cò",
+			"cos",
+			"còs",
+			"coa",
+			"ca",
+			"coas",
+			"cas",
+			"de",
+			"do",
+			"da",
+			"dos",
+			"das",
+			"desde",
 			"e",
-			"el",
-			"en",
-			"la",
-			"o",
+			"em",
+			"no",
+			"na",
+			"nos",
+			"nas",
+			"entre",
+			"ou",
 			"por",
+			"pelo",
+			"pela",
+			"pelos",
+			"pelas",
+			"para",
+			"pra",
+			"pro",
+			"prò",
+			"pros",
+			"pròs",
+			"prà",
+			"pràs",
+			"sem",
+			"sob",
+			"sobre",
 			"post",
 			"van",	// some foreign words
 			"von",
@@ -167,40 +202,48 @@ namespace RimWorld_LanguageWorker_Portuguese
 
 		// Some labels are usually in plural because of contexts,
 		// however the in-game grammar engine treats them as singular (since it is an XXX_label not an XXX_labelPlural).
-		// The list below is used to patch RulesForDef (in FixRulesForDef) and FixRulesForBodyPartRecord (in FixRulesForBodyPartRecord)
+		// The list below is used to patch RulesForDef (in FixRulesForDef)
+		// and FixRulesForBodyPartRecord (in FixRulesForBodyPartRecord)
 		private static readonly HashSet<string> DefLabel_InPlural = new HashSet<string> {
 		// ThingDef/Races_* tools..label
-			"garras",
-			"dientes",
-			"défenses",
+			"patas",
+			"dentes",
+			"pequenos dentes fofos",
 			"mandíbulas",
-			"lindos dientecitos",
-			"colmillos",
-			"colmillos venenosos",
+			"presas envenenadas",
+			"presas",
+			"veneno-presas",
 		// BodyPart group
-			"brazos",
-			"ojos",
-			"pies",
-			"garras izquierdas frontales",
-			"garras derechas frontales",
-			"manos",
-			"piernas",
-			"hombros",
+			"braços",
+			"olhos",
+			"pés",
+		//	"garras izquierdas frontales",
+		//	"garras derechas frontales",
+			"mãos",
+			"pernas",
+			"ombros",
 			"élitros",
 		// HediffDef
-			"cataratas",
-			"engelures",
-			"arañazos de tornado",
-			"artères bouchées",
-			"mecanitas fibrosas",
-			"parásitos musculares",
-			"mecanitas sensoriales",
-			"lombrices intestinales",
+		//	"cataratas",
+		//	"engelures",
+		//	"arañazos de tornado",
+			"mecanitos fibrosos",
+			"parasitas musculares",
+			"mecanitos sensoriais",
+			"lombrigas",
 		//ThingDef
-			"cortinas",
-			"escombros",
-			"sacos de arena desperdigados"
-		};
+			"calças",
+			"rochas desabadas",
+			"rochas de escombros",
+			"fios aquaticos",
+			// "bagas",
+			// "lúpulos",
+			// "batatas",
+			// "silvas",
+			// "canos",
+			"lanças arremessáveis",
+			"sacos de areia espalhados"
+			};
 
 		public override string WithIndefiniteArticle(string str, Gender gender, bool plural = false, bool name = false)
 		{
@@ -212,9 +255,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 				return str;
 
 			if (plural)
-				return (gender == Gender.Female ? "unas " : "unos ") + str;
+				return (gender == Gender.Female ? "umas " : "uns ") + str;
 
-			return (gender == Gender.Female ? "una " : "un ") + str;
+			return (gender == Gender.Female ? "uma " : "um ") + str;
 		}
 
 		public override string WithDefiniteArticle(string str, Gender gender, bool plural = false, bool name = false)
@@ -227,9 +270,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 				return str;
 
 			if (plural)
-				return (gender == Gender.Female ? "las " : "los ") + str;
+				return (gender == Gender.Female ? "as " : "os ") + str;
 
-			return (gender == Gender.Female ? "la " : "el ") + str;
+			return (gender == Gender.Female ? "a " : "o ") + str;
 		}
 
 		public override string OrdinalNumber(int number, Gender gender = Gender.None)
@@ -342,12 +385,15 @@ namespace RimWorld_LanguageWorker_Portuguese
 					continue;
 				}
 
-				// Capitalize word: skip "'", "d'" and "l'"
+				// Capitalize word: skip "'", "d'" and "l'" then capitalize the next words.
 				char firstChar = str2[0];
 				switch (firstChar)
 				{
 					case '\'':
 						array[i] = "'" + str2.Substring(1).CapitalizeHyphenated();
+						break;
+					case '"':
+						array[i] = '"' + str2.Substring(1).CapitalizeHyphenated();
 						break;
 					default:
 						if (str2.Length == 2)
@@ -378,7 +424,7 @@ namespace RimWorld_LanguageWorker_Portuguese
 		}
 
 		/// <summary>
-		/// ToTitleCase for other names, mostly starting with determinant (le, la, les),
+		/// ToTitleCase for other names, mostly starting with determinant (le, la, les in french),
 		/// ex TradeShip and faction names.
 		/// Business types and political unions do not follow the same Cap rules
 		/// and have more complicated logic.
@@ -397,38 +443,46 @@ namespace RimWorld_LanguageWorker_Portuguese
 			{
 				string str2 = array[i];
 
-				// if the first word is le/la/les/l'.
+				// TODO: this rule applies in french (le, la, les), adapt to target language.
+				// If the first word is o/a/os/as, do not capitalize automatically.
 				if (i == 0)
 				{
-					char deter = str2[0];
-					if ((deter == 'l') || (deter == 'L'))
+					char determinant = str2[0];
+					if ((determinant == 'o') || (determinant == 'O') || (determinant == 'a') || (determinant == 'A'))
 					{
 						string tmp = str2.ToLower();
-						if (tmp.Equals("le") || tmp.Equals("la") || tmp.Equals("les"))
+						if (tmp.Equals("o") || tmp.Equals("a") || tmp.Equals("os") || tmp.Equals("as"))
 						{
 							array[i] = tmp;
 							continue;
 						}
 
+						// NOTE: adapt contracted french article "l'" to target language
+						// Contractions with "'" like "l'" or "d'" are not split from the main word
+						// and cannot be listed in NonUppercaseWords because
+						// we are splitting according to ' ' or '-'.
 						if (str2.StartsWith("l'", StringComparison.CurrentCulture)
 							|| str2.StartsWith("L'", StringComparison.CurrentCulture))
 						{
-							// First word always capitalized
+							// First word after "d'" or "l'" is always capitalized
 							array[i] = "l'" + str2.Substring(2).CapitalizeHyphenated();
 							continue;
 						}
 					}
 				}
 
-				// Continue processing
+				// Continue processing without capitalizing words listed in NonUppercaseWords
+				// in the middle of the sentence.
 				if (NonUppercaseWords.Contains(str2.ToLower()))
 				{
 					array[i] = str2.ToLower();
 					continue;
 				}
 
-				// Same as ToTitleCaseProperName
-				// Capitalize word: skip "'", "d'" and "l'"
+				// Same as ToTitleCaseProperName for the remainder of the strings:
+				// Capitalize word: skip "'", "d'" and "l'" in the middle of the sentence
+				// then capitalize the next words.
+				// Ex. french names such as "François d'Assise" or "D'Alembert"
 				char first = str2[0];
 				switch (first)
 				{
@@ -447,7 +501,7 @@ namespace RimWorld_LanguageWorker_Portuguese
 							|| str2.StartsWith("l'", StringComparison.CurrentCulture)
 							|| str2.StartsWith("L'", StringComparison.CurrentCulture))
 						{
-							// First word always capitalized
+							// First word after "d'" or "l'" is always capitalized.
 							array[i] = ((i == 0) ? str2[0].ToString().ToUpper() : str2[0].ToString().ToLower()) +
 												"'" + str2.Substring(2).CapitalizeHyphenated();
 						}
@@ -466,12 +520,13 @@ namespace RimWorld_LanguageWorker_Portuguese
 
 		/// <summary>
 		/// ToTitleCase for other categories: mostly quest titles.
+		/// Only the first letter is capitalized.
 		/// </summary>
 		/// <returns>The title case other.</returns>
 		/// <param name="str">String.</param>
 		public string ToTitleCaseOther(string str)
 		{
-			// TODO: verify: no capitalisation after "[uU]n", "[uU]na"
+			// TODO: verify: no capitalisation after "[uU]m", "[uU]ma"
 			if (str.NullOrEmpty())
 				return str;
 
@@ -536,13 +591,14 @@ namespace RimWorld_LanguageWorker_Portuguese
 		}
 
 		/// <summary>
-		/// PluralizeOneWord implements teh basic grammar rules for one word.
+		/// PluralizeOneWord implements the basic grammar rules for one word.
 		/// Do not intend to be complete, but to be sufficient so that the words
 		/// in the game are correct.
-		/// Called on each appropriate part of a compound word () separated with ' ' or '-'
+		/// Called on each appropriate part of a compound word separated with ' ' or '-'
 		/// in PluralizeHyphenated and in the main function Pluralize.
 		/// Uses the word lists (HashSets):
-		///  	Exceptions_Plural_es, Exceptions_Plural_s, Exceptions_Plural_invariant.
+		///  	Exceptions_Plural_invariant, NonUppercaseWords as list of prepositions (invariant)
+		/// 	and the dictionary Exceptions_Plural_irregular.
 		/// </summary>
 		/// <returns>The plural of the given str according to gender and count.</returns>
 		/// <param name="str">String.</param>
@@ -559,15 +615,7 @@ namespace RimWorld_LanguageWorker_Portuguese
 			// Exceptions to general rules for plural
 			// Lookup in various word lists (HashSets<string> or Dictionary<string,string>)
 			// The keys are in lower case.
-			if (Exceptions_Plural_es.Contains(item))
-			{
-				str_pluralized = str.Substring(0, str.Length - 3) + "es";
-			}
-			else if (Exceptions_Plural_s.Contains(item))
-			{
-				str_pluralized = str + "s";
-			}
-			else if (Exceptions_Plural_invariant.Contains(item))
+			if (Exceptions_Plural_invariant.Contains(item))
 			{
 				// Words with invariant plural, ex. foreign words (Molotov, Yorkshire)
 				str_pluralized = str;
@@ -585,51 +633,55 @@ namespace RimWorld_LanguageWorker_Portuguese
 
 				if (IsVowel(last))
 				{
-					if (last == 'í' || last == 'ú' || last == 'Í' || last == 'Ú')
-					{
-						str_pluralized = str + "es";
-					}
-					else
-					{
-						str_pluralized = str + 's';
-					}
+					// General rule, "-s" after a vowel
+					// NOTE: Add exception to Exceptions_Plural_irregular for "-ão"
+					//	which are not handled here.
+					str_pluralized = str + 's';
 				}
 				else
 				{
-					// TODO: check if some missing rules are needed in the game,
-					//	bearing in mind that these might be useful in mods other than Vanilla RimWorld.
-					// UNDONE: Ending with -ión -> -iones
-					if ((last == 'y' || last == 'Y') && IsVowel(oneBeforeLast))
+					// Ending with [nrsz] -> -es
+					// TODO: I read conflicting rules for [zs], do not know if they are invariant or with "-es".
+					if (last == 'n' || last == 'r' || last == 'N' || last == 'R')
 					{
 						str_pluralized = str + "es";
 					}
-					else if ((last == 'z' || last == 'Z') && (str.Length >= 2))
-					{
-						// Replace 'z' with 'c', then add "es"
-						str_pluralized = str.Substring(0, str.Length - 1) + "ces";
-					}
 					else
 					{
-						//  - ("lrndzjsxLRNDZJSX".IndexOf(last) >= 0 && IsVowel(oneBeforeLast)) gets -es
-						//  - Ending with "ch" gets -es
-						//  - Ending with a consonant cluster, or a vowel + consonant!="lrndzjsxLRNDZJSX" gets -s
-						//  - Ending with st or zt are invariant (ex. test)
-						//  - Ending with s and unstressed last syllable are invariant
-						if (("lrndzjsxLRNDZJSX".IndexOf(last) >= 0 && IsVowel(oneBeforeLast))
-							 || (last == 'h' && oneBeforeLast == 'c'))
+						switch (last)
 						{
-							str_pluralized = str + "es";
-						}
-						else if (("zsZS".IndexOf(oneBeforeLast) >= 0 && (last == 't'))
-							|| ("aeiouAEIOU".IndexOf(oneBeforeLast) >= 0 && (last == 's'))
-							)
-						{
-							// Invariant, ex. el test/los test, el lunes/los lunes
-							str_pluralized = str;
-						}
-						else
-						{
-							str_pluralized = str + 's';
+							case 'm':
+								if (str.Length >= 2)
+								{
+									// OK: Replace 'm' with 'ns"
+									str_pluralized = str.Substring(0, str.Length - 1) + "ns";
+								}
+								break;
+							case 'l':
+								if ((str.Length >= 2)
+								 && (oneBeforeLast == 'a' || oneBeforeLast == 'e' || oneBeforeLast == 'o' || oneBeforeLast == 'u'))
+								{
+									// OK: Replace 'l' with 'is" except for ending "-il"
+									str_pluralized = str.Substring(0, str.Length - 1) + "is";
+								}
+								else
+								{
+									// OK: oneBeforeLast == 'i', replace 'l' with 's"
+									// TODO: Add exception to Exceptions_Plural_irregular for "-eis", ex. répteis.
+									str_pluralized = str.Substring(0, str.Length - 1) + "s";
+								}
+								break;
+							default:
+								if ("zsZS".IndexOf(last) >= 0 )
+								{
+									// TODO: Invariant
+									str_pluralized = str;
+								}
+								else
+								{
+									str_pluralized = str + 's';
+								}
+								break;
 						}
 					}
 				}
@@ -640,10 +692,11 @@ namespace RimWorld_LanguageWorker_Portuguese
 
 		/// <summary>
 		/// PluralizeHyphenated splits the given str at '-' and calls PluralizeOneWord on each part.
-		/// The word list in NonUppercaseWords (HashSet) stops further recursion (ex. de, à etc).
-		/// (This might need different lists in other languages).
+		/// The word list in NonUppercaseWords (HashSet) stops further recursion
+		/// (ex. le*s* chapea*x* rouge*s* de muffalo, le*s* haute*s* montagne*s* à droite, etc).
+		/// This might need different lists in other languages.
 		/// Another list is for words that are invariant: ex. multi-, nano-, auto- etc.
-		///  	Exceptions_Plural_es, Exceptions_Plural_s, Exceptions_Plural_invariant.
+		///  	Exceptions_Plural_invariant.
 		/// </summary>
 		private string PluralizeHyphenated(string str, Gender gender, int count = -1)
 		{
@@ -662,10 +715,10 @@ namespace RimWorld_LanguageWorker_Portuguese
 			// compound words
 			for (int i = 0; i < array.Length; i++)
 			{
-				// stop pluralization after these words
+				// Stop pluralization after these words
 				if (NonUppercaseWords.Contains(array[i])
 					// || array[i].Equals("para")
-					//|| array[i].Equals("anti")
+					// || array[i].Equals("anti")
 					) // or more generally, any verb
 				{
 					break;
@@ -692,7 +745,8 @@ namespace RimWorld_LanguageWorker_Portuguese
 						|| array[i].Equals("electro")
 						)
 					{
-						// exception to the pluralize rules
+						// Exception to the pluralize rules
+						// but do not stop the algorithm.
 						continue;
 					}
 					else
@@ -726,6 +780,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 			for (int i = 0; i < array.Length; i++)
 			{
 				// Stop pluralization after these words
+				// Contractions with "'" like "l'" or "d'" are not split from the main word
+				// and cannot be listed in NonUppercaseWords because
+				// we are splitting according to ' ' or '-'.
 				if (NonUppercaseWords.Contains(array[i])
 						|| array[i].StartsWith("d'", StringComparison.CurrentCulture)  // French elision of "de (vowel)" follows the rule for "de"
 						|| array[i].StartsWith("(", StringComparison.CurrentCulture)   // Start of words in parentheses
@@ -736,12 +793,12 @@ namespace RimWorld_LanguageWorker_Portuguese
 				else
 				{
 					if ((i > 0) && (i < array.Length - 1) &&
-								 // French has invariant adverbs listed here, such as "avant", "arrière", "hautement" 
+								// French has invariant adverbs listed here, such as "avant", "arrière", "hautement" 
+								// TODO: add more words.
 								 array[i].Equals("non")                 // in the middle ?
-							|| array[i].ToLower().Equals("pem")       // game specific: IEM (PEM)
+							|| array[i].ToLower().Equals("iem")       // game specific: IEM (PEM)
 							|| array[i].ToLower().Equals("ia")        // game specific: AI (IA)
-							|| array[i].ToLower().Equals("luciferium")
-							|| array[i].Equals("-")                   // a separator ' - '
+							|| array[i].Equals("-")                   // a separator with spaces ' - '
 						)
 					{
 						// invariants: do not change this split.
@@ -809,13 +866,21 @@ namespace RimWorld_LanguageWorker_Portuguese
 		// The Regex ([<][^>]*[>]|) component takes any XML tag into account,
 		// ex. the name color tag <color=#D09B61FF> or <Name>
 
-		// Common contractions
-		private static readonly Regex DeEl = new Regex(@"\b(d)e ([<][^>]*[>]|)el ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-		private static readonly Regex AEl = new Regex(@"\b(a) ([<][^>]*[>]|)el ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		// Common contractions (in speech)
+		private static readonly Regex DeArticle = new Regex(@"\b(d)e ([<][^>]*[>]|)(ele|ela|eles|elas|o|a|os|as|um|uma|uns|umas) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex EmArticle = new Regex(@"\b(em) ([<][^>]*[>]|)(ele|ela|eles|elas|o|a|os|as|um|uma|uns|umas) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex PorArticle = new Regex(@"\b(p)or ([<][^>]*[>]|)(o|a|os|as) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex AmascArticle = new Regex(@"\b(a) ([<][^>]*[>]|)o(|s) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex AfemArticle = new Regex(@"\b(a) ([<][^>]*[>]|)a(|s) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex ParaArticle = new Regex(@"\b(para|pra) ([<][^>]*[>]|)(o|a|os|as|um|uma|uns|umas) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex ComArticle = new Regex(@"\b(com) ([<][^>]*[>]|)(o|a|os|as|um|uma|uns|umas) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+		// UNDONE: should be useful if there are prepositional pronoun -> consigo
+		//private static readonly Regex ComSigo = new Regex(@"\b(com) ([<][^>]*[>]|)(si) ", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		// Incorrect denomination of psychic drone affected gender: should be "de sexo masculino/femenino"
-		private static readonly Regex sexMale = new Regex(@"\b(sexo )varón\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-		private static readonly Regex sexFemale = new Regex(@"\b(sexo )mujer\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		//private static readonly Regex sexMale = new Regex(@"\b(sexo )varón\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		//private static readonly Regex sexFemale = new Regex(@"\b(sexo )mujer\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 		/// <summary>
 		/// The PostProcessing core.
@@ -825,10 +890,16 @@ namespace RimWorld_LanguageWorker_Portuguese
 			if (str.NullOrEmpty())
 				return str;
 
-			str = DeEl.Replace(str, "$1el $2");
-			str = AEl.Replace(str, "$1l $2");
-			str = sexMale.Replace(str, "$1masculino");
-			str = sexFemale.Replace(str, "$1femenino");
+			str = DeArticle.Replace(str, "$1$3 $2");
+			str = EmArticle.Replace(str, "n$3 $2");
+			str = PorArticle.Replace(str, "$1el$3 $2");
+			str = AmascArticle.Replace(str, "$1o$3 $2");
+			str = AfemArticle.Replace(str, "à$3 $2");
+			// TODO: check if contraction fo para is correct in formal writing.
+			str = ParaArticle.Replace(str, "pr$3 $2");
+			str = ComArticle.Replace(str, "c$3 $2");
+			//str = sexMale.Replace(str, "$1masculino");
+			//str = sexFemale.Replace(str, "$1femenino");
 
 			// Clean out zero-width space
 			return str.Replace("\u200B", "");
@@ -870,13 +941,13 @@ namespace RimWorld_LanguageWorker_Portuguese
 							// the grammar uses male only as gender
 							gender = Gender.Male;
 							// RW will use kind.labelMale since the grammatical gender is Male !
-							// TODO: verify female (ex. la hembra de avestruz)
-							kind.labelMale = kind.label + " hembra";
+							// TODO: verify female (ex. in spanish la hembra de avestruz)
+							kind.labelMale = kind.label + " fêmea";
 
 							if (kind.labelFemale.NullOrEmpty())
 							{
 								// build one if the language does not provide kind.labelFemale
-								kind.labelFemale = kind.label + " hembra";
+								kind.labelFemale = kind.label + " fêmea";
 							}
 						}
 
@@ -960,8 +1031,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 			yield return new Rule_String(prefix + "description", def.description);
 			yield return new Rule_String(prefix + "definite", languageWorker.WithDefiniteArticle(def.label, gender, plural));
 			yield return new Rule_String(prefix + "indefinite", languageWorker.WithIndefiniteArticle(def.label, gender, plural));
-			// TODO: verify correctness of "sus" (de él, de ella, de ellos, de ellas)
-			yield return new Rule_String(prefix + "possessive", plural ? "sus" : gender.GetPossessive());
+			// TODO: X_possessive for plural will only activate if the word is classified in WordInfo/Gender/Female.txt
+			//	RimWorld does not have keys for possessive plural so here it is :
+			yield return new Rule_String(prefix + "possessive", plural ? ( gender == Gender.Female ? "suas" : "seus") : gender.GetPossessive());
 		}
 
 		public static IEnumerable<Rule> FixRulesForBodyPartRecord(string prefix, BodyPartRecord part)
@@ -983,8 +1055,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 			yield return new Rule_String(prefix + "label", part.Label);
 			yield return new Rule_String(prefix + "definite", languageWorker.WithDefiniteArticle(part.Label, gender, plural));
 			yield return new Rule_String(prefix + "indefinite", languageWorker.WithIndefiniteArticle(part.Label, gender, plural));
-			// TODO: verify correctness of "sus" (de él, de ella, de ellos, de ellas)
-			yield return new Rule_String(prefix + "possessive", plural ? "sus" : gender.GetPossessive());
+			// TODO: X_possessive for plural will only activate if the word is classified in WordInfo/Gender/Female.txt
+			//	RimWorld does not have keys for possessive plural so here it is :
+			yield return new Rule_String(prefix + "possessive", plural ? (gender == Gender.Female ? "suas" : "seus") : gender.GetPossessive());
 		}
 
 	}

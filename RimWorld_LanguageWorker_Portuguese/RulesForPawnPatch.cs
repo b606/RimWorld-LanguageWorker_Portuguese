@@ -1,4 +1,4 @@
-﻿// <code-header>
+// <code-header>
 //   <author>b606</author>
 //   <summary>
 //		RulesForPawnPatch: Prefix and and postfix libHarmony patch for GrammarUtility.RulesForPawn.
@@ -98,11 +98,9 @@ namespace RimWorld_LanguageWorker_Portuguese
 			__state = new PhysicalCharacter(ref kind, ref gender);
 
 			// if the current language is not the target, do nothing
-			if (! LanguageWorkerPatcher.IsTargetLanguage(LanguageDatabase.activeLanguage.FriendlyNameEnglish))
+			if (!LanguageWorkerPatcher.IsTargetLanguage(LanguageDatabase.activeLanguage.FriendlyNameEnglish))
 				return true;
-
-			// change kind.label and gender according to the language grammar
-			LanguageWorker_Portuguese.FixPawnGender(ref kind, ref gender, relationInfo);
+			LanguageWorkerPatcher.FixPawnGender(ref kind, ref gender, relationInfo);
 
 			// continue to the original GrammarUtility.RulesforPawn
 			return true;

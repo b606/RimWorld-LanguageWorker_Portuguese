@@ -31,7 +31,7 @@ namespace RimWorld_LanguageWorker_Portuguese
 				return true;
 
 			// Rewrite the method entirely since it is short enough
-			__result = LanguageWorker_Portuguese.FixRulesForDef(prefix, def);
+			__result = LanguageWorkerPatcher.FixRulesForDef(prefix, def);
 
 #if DEBUG
 			LanguageWorkerPatcher.LogMessage("--RulesForDefPrefix called...");

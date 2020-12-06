@@ -1,0 +1,11 @@
+2020-12-06  b606  <7627533+b606@users.noreply.github.com>
+
+	* Patcher.cs:
+	* RulesForDefPatch.cs:
+	* RulesForPawnPatch.cs:
+	* LanguageWorker_Mod.cs:
+	* LoadedLanguagePatch.cs:
+	* LanguageWorker_Portuguese.cs:
+	* RulesForBodyPartRecordPatch.cs:
+	* LanguageWorker_Portuguese_Debug.cs: Initial release.
+

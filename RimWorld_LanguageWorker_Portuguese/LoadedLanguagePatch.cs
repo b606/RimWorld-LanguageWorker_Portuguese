@@ -1,4 +1,4 @@
-﻿// <code-header>
+// <code-header>
 //   <author>b606</author>
 //   <summary>
 //		LoadedLanguagePatch: If the loaded language equals the target language,
@@ -29,17 +29,17 @@ namespace RimWorld_LanguageWorker_Portuguese
 		static bool GetWorkerPrefix(LoadedLanguage __instance, ref LanguageWorker ___workerInt)
 		{
 			// if the current language is not the target, do nothing
-			if (! LanguageWorkerPatcher.IsTargetLanguage(__instance.FriendlyNameEnglish))
+			if (!LanguageWorkerPatcher.IsTargetLanguage(__instance.FriendlyNameEnglish))
 				return true;
 
-			Type myType = typeof(RimWorld_LanguageWorker_Portuguese.LanguageWorker_Portuguese);
+			Type myType = LanguageWorkerPatcher.GetWorkerType();
 			if (__instance.info.languageWorkerClass != myType)
 			{
 				// overwrite all target language worker class
 				__instance.info.languageWorkerClass = myType;
 				if (___workerInt != null && ___workerInt.GetType() != myType)
 				{
-					___workerInt = (LanguageWorker_Portuguese)Activator.CreateInstance(myType);
+					___workerInt = (LanguageWorker)Activator.CreateInstance(myType);
 				}
 			}
 

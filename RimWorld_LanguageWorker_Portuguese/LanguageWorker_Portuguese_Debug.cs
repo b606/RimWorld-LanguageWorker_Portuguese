@@ -5,6 +5,7 @@
 //	 </summary>
 // </code-header>
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -19,10 +20,17 @@ namespace RimWorld_LanguageWorker_Portuguese
 		private static readonly HashSet<string> targetLanguageLSet = new HashSet<string>
 		{
 				"Portuguese",
+				"Brazilian Portuguese",
 				"Latin American Portuguese"
 		};
 
-		public static bool IsTargetLanguage(string aLang) => targetLanguageLSet.Contains(aLang);
+		public static bool IsTargetLanguage(string aLang)
+		{
+			if (targetLanguageLSet.Contains(aLang))
+				return true;
+
+			return aLang.StartsWith(targetLanguageFamily, StringComparison.Ordinal);
+		}
 
 		public static string GetTargetLanguageFamily() => targetLanguageFamily;
 

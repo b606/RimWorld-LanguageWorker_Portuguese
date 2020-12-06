@@ -1,4 +1,4 @@
-﻿// <code-header>
+// <code-header>
 //   <author>b606</author>
 //   <summary>The class LanguageWorker_Mod derived from Verse.Mod </summary>
 // </code-header>
@@ -45,14 +45,14 @@ namespace RimWorld_LanguageWorker_Portuguese
 
 			LoadedLanguage active = LanguageDatabase.activeLanguage;
 			LanguageWorkerPatcher.LogMessage("Active: " + active.FriendlyNameEnglish
-				+ " (" + active.folderName + ") " + active.Worker.GetType());
+				+ " (Folder: " + active.folderName + ") " + active.Worker.GetType());
 
 			foreach (LoadedLanguage l in LanguageDatabase.AllLoadedLanguages)
 			{
 				if (LanguageWorkerPatcher.IsTargetLanguage(l.FriendlyNameEnglish))
 				{
 					LanguageWorkerPatcher.LogMessage("Other: " + l.FriendlyNameEnglish +
-						" (" + l.folderName + ") " + l.info.languageWorkerClass);
+						" (Folder: " + l.folderName + ") " + l.info.languageWorkerClass);
 				}
 			}
 		}
