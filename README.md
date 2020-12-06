@@ -38,7 +38,7 @@ Features marked with (*) cannot be implemented in the vanilla LanguageWorker_Por
 
 ### 3. Installation
 
-- **Subscribe to the mod on Steam Workshop** (https://steamcommunity.com/sharedfiles/filedetails/?id=2293997580) and activate ou deactivate the mod "LanguageWorkerPortuguese_Mod" in the game,
+- **Not yet on Steam Workshop**,
 
 - or **download the zip archive** (https://github.com/b606/RimWorld-LanguageWorker_Portuguese/releases/latest), and extract it in the Mods folder of RimWorld, generally:
 
@@ -51,10 +51,10 @@ Features marked with (*) cannot be implemented in the vanilla LanguageWorker_Por
 
 ### 4. Changelog
 
-2020/11/21.
+2020/11/06.
   - Initial release.
 
-2020/11/18.
+2020/11/30.
   - Initial commit.
 
 ### 5. Work in progress
